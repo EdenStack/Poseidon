@@ -11,7 +11,7 @@
  Target Server Version : 50717
  File Encoding         : utf-8
 
- Date: 03/25/2017 17:41:46 PM
+ Date: 03/26/2017 01:38:21 AM
 */
 
 SET NAMES utf8mb4;
@@ -28,13 +28,13 @@ CREATE TABLE `journal` (
   `journal_id` int(11) NOT NULL COMMENT '期刊ID',
   `key_words` tinytext COMMENT '期刊关键字',
   `vol_cover_img` varchar(255) DEFAULT NULL COMMENT '期刊封面',
-  `tracks` varchar(20) NOT NULL COMMENT '曲目ID列表',
+  `tracks` varchar(100) NOT NULL COMMENT '曲目ID列表',
   `relative_vols` varchar(255) DEFAULT NULL COMMENT '相似期刊列表',
   `vol_date` varchar(10) DEFAULT NULL COMMENT '期刊创建日期',
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `journal_id_index` (`journal_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `track`
@@ -44,13 +44,13 @@ CREATE TABLE `track` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `track_id` int(11) NOT NULL COMMENT '曲目ID',
   `name` varchar(100) DEFAULT NULL COMMENT '曲目名称',
-  `artist` varchar(50) DEFAULT NULL COMMENT '艺术家',
+  `artist` varchar(100) DEFAULT NULL COMMENT '艺术家',
   `cover_img` varchar(255) DEFAULT NULL COMMENT '专辑封面url',
   `album` varchar(255) DEFAULT NULL COMMENT '曲目所属专辑名',
-  `mp3_url_suffix` varchar(255) DEFAULT NULL COMMENT '曲目下载url',
+  `mp3_url` varchar(255) DEFAULT NULL COMMENT '曲目下载url',
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `track_id_index` (`track_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 
 SET FOREIGN_KEY_CHECKS = 1;

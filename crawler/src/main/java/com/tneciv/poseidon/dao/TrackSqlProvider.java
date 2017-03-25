@@ -70,8 +70,8 @@ public class TrackSqlProvider {
             sql.VALUES("album", "#{album,jdbcType=VARCHAR}");
         }
         
-        if (record.getMp3UrlSuffix() != null) {
-            sql.VALUES("mp3_url_suffix", "#{mp3UrlSuffix,jdbcType=VARCHAR}");
+        if (record.getMp3Url() != null) {
+            sql.VALUES("mp3_url", "#{mp3Url,jdbcType=VARCHAR}");
         }
         
         if (record.getCreateTime() != null) {
@@ -99,7 +99,7 @@ public class TrackSqlProvider {
         sql.SELECT("artist");
         sql.SELECT("cover_img");
         sql.SELECT("album");
-        sql.SELECT("mp3_url_suffix");
+        sql.SELECT("mp3_url");
         sql.SELECT("create_time");
         sql.FROM("track");
         applyWhere(sql, example, false);
@@ -148,8 +148,8 @@ public class TrackSqlProvider {
             sql.SET("album = #{record.album,jdbcType=VARCHAR}");
         }
         
-        if (record.getMp3UrlSuffix() != null) {
-            sql.SET("mp3_url_suffix = #{record.mp3UrlSuffix,jdbcType=VARCHAR}");
+        if (record.getMp3Url() != null) {
+            sql.SET("mp3_url = #{record.mp3Url,jdbcType=VARCHAR}");
         }
         
         if (record.getCreateTime() != null) {
@@ -176,7 +176,7 @@ public class TrackSqlProvider {
         sql.SET("artist = #{record.artist,jdbcType=VARCHAR}");
         sql.SET("cover_img = #{record.coverImg,jdbcType=VARCHAR}");
         sql.SET("album = #{record.album,jdbcType=VARCHAR}");
-        sql.SET("mp3_url_suffix = #{record.mp3UrlSuffix,jdbcType=VARCHAR}");
+        sql.SET("mp3_url = #{record.mp3Url,jdbcType=VARCHAR}");
         sql.SET("create_time = #{record.createTime,jdbcType=TIMESTAMP}");
         
         TrackExample example = (TrackExample) parameter.get("example");
@@ -214,8 +214,8 @@ public class TrackSqlProvider {
             sql.SET("album = #{album,jdbcType=VARCHAR}");
         }
         
-        if (record.getMp3UrlSuffix() != null) {
-            sql.SET("mp3_url_suffix = #{mp3UrlSuffix,jdbcType=VARCHAR}");
+        if (record.getMp3Url() != null) {
+            sql.SET("mp3_url = #{mp3Url,jdbcType=VARCHAR}");
         }
         
         if (record.getCreateTime() != null) {
