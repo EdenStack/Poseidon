@@ -20,6 +20,14 @@ public class CommonUtil {
         return StringUtils.substringBefore(url, JPG_SEPARATOR) + JPG_SEPARATOR;
     }
 
+    public static String substringArtist(String artist) {
+        return StringUtils.substringAfter(artist, "Artist:").trim();
+    }
+
+    public static String substringAlbum(String album) {
+        return StringUtils.substringAfter(album, "Album:").trim();
+    }
+
     public static String substringTrackId(String trackId) {
         return StringUtils.substringAfter(trackId, "track");
     }

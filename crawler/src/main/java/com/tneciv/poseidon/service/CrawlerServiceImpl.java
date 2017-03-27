@@ -22,6 +22,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.function.Consumer;
 
+import static com.tneciv.poseidon.common.CommonUtil.*;
+
 /**
  * Created by Tneciv on 2017/3/25.
  */
@@ -69,21 +71,22 @@ public class CrawlerServiceImpl implements CrawlerService {
             public void accept(Element element) {
                 String sortId = element.select("a.trackname").text().substring(0, 2);
                 String id = element.select("li.track-item").attr("id");
-                String trackId = CommonUtil.substringTrackId(id);
+                String trackId = substringTrackId(id);
                 String trackCoverImg = element.select("img.cover").attr("src");
                 String name = element.select("p.name").text();
                 String artist = element.select("p.artist").text();
+
                 String album = element.select("p.album").text();
                 trackIds.add(trackId);
 
                 Track track = new Track();
-                track.setAlbum(album);
-                track.setArtist(artist);
-                track.setCoverImg(trackCoverImg);
+                track.setAlbum(substringAlbum(album));
+                track.setArtist(substringArtist(artist));
+                track.setCoverImg(substringImgUrl(trackCoverImg));
                 track.setCreateTime(new Date());
                 track.setTrackId(Integer.valueOf(trackId));
                 track.setName(name);
-                track.setMp3Url(CommonUtil.spliceMP3Url(journalId, sortId));
+                track.setMp3Url(spliceMP3Url(journalId, sortId));
                 trackMapper.insert(track);
                 trackList.add(track);
 
@@ -92,13 +95,13 @@ public class CrawlerServiceImpl implements CrawlerService {
 
         Journal journal = new Journal();
         journal.setKeyWords(keywords);
-        journal.setVolCoverImg(CommonUtil.substringImgUrl(volCoverImage));
+        journal.setVolCoverImg(substringImgUrl(volCoverImage));
         journal.setVolDesc(desc);
         journal.setTitle(title);
         journal.setVolDate(volDate);
         journal.setCreateTime(new Date());
-        journal.setRelativeVols(CommonUtil.convertListToStringArr(list));
-        journal.setTracks(CommonUtil.convertListToStringArr(trackIds));
+        journal.setRelativeVols(convertListToStringArr(list));
+        journal.setTracks(convertListToStringArr(trackIds));
         journal.setJournalId(Integer.valueOf(journalId));
 
         journalMapper.insert(journal);

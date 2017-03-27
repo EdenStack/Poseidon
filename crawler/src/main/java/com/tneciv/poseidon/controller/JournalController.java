@@ -1,4 +1,4 @@
-package com.tneciv.poseidon;
+package com.tneciv.poseidon.controller;
 
 import com.tneciv.poseidon.service.CrawlerService;
 import org.slf4j.Logger;

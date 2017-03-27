@@ -5,7 +5,7 @@
 Including the following services ：
 
 * Discovery-server service
-* Crawler service
+* CrawledInfo service
 * Config service
 * API gateway
 * Content service

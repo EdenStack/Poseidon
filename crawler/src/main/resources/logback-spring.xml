@@ -19,7 +19,7 @@
         
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             
-            <fileNamePattern>${catalina.home}/logs/tneciv/sql%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${catalina.home}/logs/tneciv/poseidon_%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- 保留 30天数据，默认无限-->
             <MaxHistory>30</MaxHistory>
             
