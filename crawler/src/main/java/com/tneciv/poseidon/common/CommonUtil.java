@@ -41,4 +41,8 @@ public class CommonUtil {
                 .append(".mp3").toString();
         return url;
     }
+
+    public static String spliceLikeSQL(String s) {
+        return "%" + s + "%";
+    }
 }

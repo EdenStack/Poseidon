@@ -1,12 +1,12 @@
-package com.tneciv.poseidon.service;
+package com.tneciv.poseidon.service.impl;
 
-import com.tneciv.poseidon.common.CommonUtil;
 import com.tneciv.poseidon.dao.JournalMapper;
 import com.tneciv.poseidon.dao.TrackMapper;
 import com.tneciv.poseidon.entity.Journal;
 import com.tneciv.poseidon.entity.Track;
 import com.tneciv.poseidon.retrofit.ApiServiceFactory;
 import com.tneciv.poseidon.retrofit.LuooService;
+import com.tneciv.poseidon.service.CrawlerService;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
