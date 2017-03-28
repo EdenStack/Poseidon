@@ -57,12 +57,10 @@ public interface TrackMapper {
     @Insert({
         "insert into track (id, track_id, ",
         "name, artist, cover_img, ",
-        "album, mp3_url_suffix, ",
-        "create_time)",
+        "album, mp3_url, create_time)",
         "values (#{id,jdbcType=INTEGER}, #{trackId,jdbcType=INTEGER}, ",
         "#{name,jdbcType=VARCHAR}, #{artist,jdbcType=VARCHAR}, #{coverImg,jdbcType=VARCHAR}, ",
-        "#{album,jdbcType=VARCHAR}, #{mp3UrlSuffix,jdbcType=VARCHAR}, ",
-        "#{createTime,jdbcType=TIMESTAMP})"
+        "#{album,jdbcType=VARCHAR}, #{mp3Url,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})"
     })
     int insert(Track record);
 
@@ -89,7 +87,7 @@ public interface TrackMapper {
         @Arg(column="artist", javaType=String.class, jdbcType=JdbcType.VARCHAR),
         @Arg(column="cover_img", javaType=String.class, jdbcType=JdbcType.VARCHAR),
         @Arg(column="album", javaType=String.class, jdbcType=JdbcType.VARCHAR),
-        @Arg(column="mp3_url_suffix", javaType=String.class, jdbcType=JdbcType.VARCHAR),
+        @Arg(column="mp3_url", javaType=String.class, jdbcType=JdbcType.VARCHAR),
         @Arg(column="create_time", javaType=Date.class, jdbcType=JdbcType.TIMESTAMP)
     })
     List<Track> selectByExample(TrackExample example);
@@ -102,7 +100,7 @@ public interface TrackMapper {
      */
     @Select({
         "select",
-        "id, track_id, name, artist, cover_img, album, mp3_url_suffix, create_time",
+        "id, track_id, name, artist, cover_img, album, mp3_url, create_time",
         "from track",
         "where id = #{id,jdbcType=INTEGER}"
     })
@@ -113,7 +111,7 @@ public interface TrackMapper {
         @Arg(column="artist", javaType=String.class, jdbcType=JdbcType.VARCHAR),
         @Arg(column="cover_img", javaType=String.class, jdbcType=JdbcType.VARCHAR),
         @Arg(column="album", javaType=String.class, jdbcType=JdbcType.VARCHAR),
-        @Arg(column="mp3_url_suffix", javaType=String.class, jdbcType=JdbcType.VARCHAR),
+        @Arg(column="mp3_url", javaType=String.class, jdbcType=JdbcType.VARCHAR),
         @Arg(column="create_time", javaType=Date.class, jdbcType=JdbcType.TIMESTAMP)
     })
     Track selectByPrimaryKey(Integer id);
@@ -158,7 +156,7 @@ public interface TrackMapper {
           "artist = #{artist,jdbcType=VARCHAR},",
           "cover_img = #{coverImg,jdbcType=VARCHAR},",
           "album = #{album,jdbcType=VARCHAR},",
-          "mp3_url_suffix = #{mp3UrlSuffix,jdbcType=VARCHAR},",
+          "mp3_url = #{mp3Url,jdbcType=VARCHAR},",
           "create_time = #{createTime,jdbcType=TIMESTAMP}",
         "where id = #{id,jdbcType=INTEGER}"
     })

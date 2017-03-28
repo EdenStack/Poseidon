@@ -595,73 +595,73 @@ public class TrackExample {
             return (Criteria) this;
         }
 
-        public Criteria andMp3UrlSuffixIsNull() {
-            addCriterion("mp3_url_suffix is null");
+        public Criteria andMp3UrlIsNull() {
+            addCriterion("mp3_url is null");
             return (Criteria) this;
         }
 
-        public Criteria andMp3UrlSuffixIsNotNull() {
-            addCriterion("mp3_url_suffix is not null");
+        public Criteria andMp3UrlIsNotNull() {
+            addCriterion("mp3_url is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMp3UrlSuffixEqualTo(String value) {
-            addCriterion("mp3_url_suffix =", value, "mp3UrlSuffix");
+        public Criteria andMp3UrlEqualTo(String value) {
+            addCriterion("mp3_url =", value, "mp3Url");
             return (Criteria) this;
         }
 
-        public Criteria andMp3UrlSuffixNotEqualTo(String value) {
-            addCriterion("mp3_url_suffix <>", value, "mp3UrlSuffix");
+        public Criteria andMp3UrlNotEqualTo(String value) {
+            addCriterion("mp3_url <>", value, "mp3Url");
             return (Criteria) this;
         }
 
-        public Criteria andMp3UrlSuffixGreaterThan(String value) {
-            addCriterion("mp3_url_suffix >", value, "mp3UrlSuffix");
+        public Criteria andMp3UrlGreaterThan(String value) {
+            addCriterion("mp3_url >", value, "mp3Url");
             return (Criteria) this;
         }
 
-        public Criteria andMp3UrlSuffixGreaterThanOrEqualTo(String value) {
-            addCriterion("mp3_url_suffix >=", value, "mp3UrlSuffix");
+        public Criteria andMp3UrlGreaterThanOrEqualTo(String value) {
+            addCriterion("mp3_url >=", value, "mp3Url");
             return (Criteria) this;
         }
 
-        public Criteria andMp3UrlSuffixLessThan(String value) {
-            addCriterion("mp3_url_suffix <", value, "mp3UrlSuffix");
+        public Criteria andMp3UrlLessThan(String value) {
+            addCriterion("mp3_url <", value, "mp3Url");
             return (Criteria) this;
         }
 
-        public Criteria andMp3UrlSuffixLessThanOrEqualTo(String value) {
-            addCriterion("mp3_url_suffix <=", value, "mp3UrlSuffix");
+        public Criteria andMp3UrlLessThanOrEqualTo(String value) {
+            addCriterion("mp3_url <=", value, "mp3Url");
             return (Criteria) this;
         }
 
-        public Criteria andMp3UrlSuffixLike(String value) {
-            addCriterion("mp3_url_suffix like", value, "mp3UrlSuffix");
+        public Criteria andMp3UrlLike(String value) {
+            addCriterion("mp3_url like", value, "mp3Url");
             return (Criteria) this;
         }
 
-        public Criteria andMp3UrlSuffixNotLike(String value) {
-            addCriterion("mp3_url_suffix not like", value, "mp3UrlSuffix");
+        public Criteria andMp3UrlNotLike(String value) {
+            addCriterion("mp3_url not like", value, "mp3Url");
             return (Criteria) this;
         }
 
-        public Criteria andMp3UrlSuffixIn(List<String> values) {
-            addCriterion("mp3_url_suffix in", values, "mp3UrlSuffix");
+        public Criteria andMp3UrlIn(List<String> values) {
+            addCriterion("mp3_url in", values, "mp3Url");
             return (Criteria) this;
         }
 
-        public Criteria andMp3UrlSuffixNotIn(List<String> values) {
-            addCriterion("mp3_url_suffix not in", values, "mp3UrlSuffix");
+        public Criteria andMp3UrlNotIn(List<String> values) {
+            addCriterion("mp3_url not in", values, "mp3Url");
             return (Criteria) this;
         }
 
-        public Criteria andMp3UrlSuffixBetween(String value1, String value2) {
-            addCriterion("mp3_url_suffix between", value1, value2, "mp3UrlSuffix");
+        public Criteria andMp3UrlBetween(String value1, String value2) {
+            addCriterion("mp3_url between", value1, value2, "mp3Url");
             return (Criteria) this;
         }
 
-        public Criteria andMp3UrlSuffixNotBetween(String value1, String value2) {
-            addCriterion("mp3_url_suffix not between", value1, value2, "mp3UrlSuffix");
+        public Criteria andMp3UrlNotBetween(String value1, String value2) {
+            addCriterion("mp3_url not between", value1, value2, "mp3Url");
             return (Criteria) this;
         }
 
