@@ -19,10 +19,10 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
     public ResponseEntity<ErrorObject> handleError500(RuntimeException ex) throws Throwable {
-        log.error("Internal error cause by : {}", ex);
+        log.error("Internal error cause by : {}", ex.getMessage());
         ErrorObject errorObject = new ErrorObject(HttpStatus.INTERNAL_SERVER_ERROR,
                 "500",
-                ex.getCause().toString(),
+                "Internal error .",
                 ex.getMessage());
         return new ResponseEntity<>(errorObject, HttpStatus.INTERNAL_SERVER_ERROR);
     }
