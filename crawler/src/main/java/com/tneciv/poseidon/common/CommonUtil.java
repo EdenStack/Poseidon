@@ -22,6 +22,19 @@ public class CommonUtil {
         return list;
     }
 
+    public static int[] convertStringToIntArr(String arr) {
+        //String[] strings = StringUtils.split(arr, ",");
+        //List<Integer> integerArrayList = new ArrayList<>();
+        //for (String s : strings) {
+        //    integerArrayList.add(Integer.valueOf(s));
+        //}
+        List<String> list = convertStringArrToList(arr);
+        int[] ints = list.stream()
+                .mapToInt(Integer::valueOf)
+                .toArray();
+        return ints;
+    }
+
     public static String substringImgUrl(String url) {
         return StringUtils.substringBefore(url, JPG_SEPARATOR) + JPG_SEPARATOR;
     }

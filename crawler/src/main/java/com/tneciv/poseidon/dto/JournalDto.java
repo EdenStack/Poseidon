@@ -36,12 +36,12 @@ public class JournalDto extends Journal implements Serializable {
     private String relativeVolArr;
 
     @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = Constant.MODEL_TYPE_SPRING)
-    public interface DtoMapper {
+    public interface JournalDtoMapper {
 
         @Mappings({
                 @Mapping(source = "tracks", target = "tracksArr"),
                 @Mapping(source = "relativeVols", target = "relativeVolArr")})
-        JournalDto toTarget(Journal s);
+        JournalDto toTarget(Journal journal);
 
     }
 

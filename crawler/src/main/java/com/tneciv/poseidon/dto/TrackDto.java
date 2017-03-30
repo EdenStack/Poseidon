@@ -1,12 +1,15 @@
 package com.tneciv.poseidon.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.tneciv.poseidon.common.Constant;
 import com.tneciv.poseidon.entity.Track;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Created by Tneciv on 2017/3/30.
@@ -14,17 +17,19 @@ import java.util.Date;
 @Data
 @ToString
 @NoArgsConstructor
+@JsonIgnoreProperties({"id", "name", "createTime"})
 public class TrackDto extends Track implements Serializable {
 
     private static final long serialVersionUID = 5189587397872626808L;
 
-    public TrackDto(Integer id,
-                    Integer trackId,
-                    String name,
-                    String artist,
-                    String coverImg,
-                    String album,
-                    String mp3Url, Date createTime) {
-        super(id, trackId, name, artist, coverImg, album, mp3Url, createTime);
+    private String trackName;
+
+    @Mapper(componentModel = Constant.MODEL_TYPE_SPRING)
+    public interface TrackDtoMapper {
+
+        @Mapping(source = "name", target = "trackName")
+        TrackDto toTarget(Track track);
+
     }
+
 }
