@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static org.mockito.BDDMockito.given;
-
 /**
  * Created by Tneciv on 2017/3/29.
  */
@@ -34,8 +32,8 @@ public class JournalControllerTest {
         Journal journal = new Journal(222, "sdsd", 222, "sdd", "sdsd", "", "", "", new Date(), "");
         List<Journal> list = new ArrayList<>();
         list.add(journal);
-        given(this.journalService.queryByJournalId(222))
-                .willReturn(list);
+        //given(this.journalService.queryByJournalId(222))
+        //        .willReturn(list);
 
     }
 

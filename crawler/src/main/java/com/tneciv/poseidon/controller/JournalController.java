@@ -1,8 +1,11 @@
 package com.tneciv.poseidon.controller;
 
 import com.tneciv.poseidon.common.ResponseBody;
+import com.tneciv.poseidon.dto.JournalDto;
 import com.tneciv.poseidon.entity.Journal;
 import com.tneciv.poseidon.service.JournalService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,12 +24,13 @@ public class JournalController {
     @Autowired
     private JournalService journalService;
 
+    @ApiOperation(value = "获取期刊详细信息", notes = "根据url的id来获取期刊详细信息")
+    @ApiImplicitParam(name = "id", value = "期刊ID", required = true, dataType = "Integer")
     @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseBody<List<Journal>> queryById(@PathVariable("id") Integer id) {
-        List<Journal> journalList = journalService.queryByJournalId(id);
-        int i = 1 / 0;
-        return ResponseBody.success(journalList);
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseBody<JournalDto> queryById(@PathVariable("id") Integer id) {
+        JournalDto journalDto = journalService.queryByJournalId(id);
+        return ResponseBody.success(journalDto);
     }
 
     @GetMapping("/keyword/{keyword}")

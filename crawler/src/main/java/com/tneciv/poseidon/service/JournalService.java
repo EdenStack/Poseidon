@@ -1,5 +1,6 @@
 package com.tneciv.poseidon.service;
 
+import com.tneciv.poseidon.dto.JournalDto;
 import com.tneciv.poseidon.entity.Journal;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
  * Created by Tneciv on 2017/3/27.
  */
 public interface JournalService {
-    List<Journal> queryByJournalId(Integer id);
+    JournalDto queryByJournalId(Integer id);
 
     List<Journal> queryByLikeTitles(String title);
 

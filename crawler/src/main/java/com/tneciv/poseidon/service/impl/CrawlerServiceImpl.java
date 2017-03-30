@@ -7,20 +7,17 @@ import com.tneciv.poseidon.entity.Track;
 import com.tneciv.poseidon.retrofit.ApiServiceFactory;
 import com.tneciv.poseidon.retrofit.LuooService;
 import com.tneciv.poseidon.service.CrawlerService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.function.Consumer;
 
 import static com.tneciv.poseidon.common.CommonUtil.*;
 
@@ -28,9 +25,8 @@ import static com.tneciv.poseidon.common.CommonUtil.*;
  * Created by Tneciv on 2017/3/25.
  */
 @Service
+@Slf4j
 public class CrawlerServiceImpl implements CrawlerService {
-
-    private static final Logger logger = LoggerFactory.getLogger(CrawlerServiceImpl.class);
 
     @Autowired
     private JournalMapper journalMapper;
@@ -42,7 +38,7 @@ public class CrawlerServiceImpl implements CrawlerService {
 
         LuooService service = ApiServiceFactory.getInstance().create(LuooService.class);
         service.getJournalById(id)
-                .subscribe(s -> handleResponseHtml(s));
+                .subscribe(this::handleResponseHtml);
 
     }
 
@@ -66,31 +62,28 @@ public class CrawlerServiceImpl implements CrawlerService {
         List<Track> trackList = new ArrayList<>();
         Elements tracks = document.select("div.vol-tracklist")
                 .select("li.track-item");
-        tracks.forEach(new Consumer<Element>() {
-            @Override
-            public void accept(Element element) {
-                String sortId = element.select("a.trackname").text().substring(0, 2);
-                String id = element.select("li.track-item").attr("id");
-                String trackId = substringTrackId(id);
-                String trackCoverImg = element.select("img.cover").attr("src");
-                String name = element.select("p.name").text();
-                String artist = element.select("p.artist").text();
+        tracks.forEach(element -> {
+            String sortId = element.select("a.trackname").text().substring(0, 2);
+            String id = element.select("li.track-item").attr("id");
+            String trackId = substringTrackId(id);
+            String trackCoverImg = element.select("img.cover").attr("src");
+            String name = element.select("p.name").text();
+            String artist = element.select("p.artist").text();
 
-                String album = element.select("p.album").text();
-                trackIds.add(trackId);
+            String album = element.select("p.album").text();
+            trackIds.add(trackId);
 
-                Track track = new Track();
-                track.setAlbum(substringAlbum(album));
-                track.setArtist(substringArtist(artist));
-                track.setCoverImg(substringImgUrl(trackCoverImg));
-                track.setCreateTime(new Date());
-                track.setTrackId(Integer.valueOf(trackId));
-                track.setName(name);
-                track.setMp3Url(spliceMP3Url(journalId, sortId));
-                trackMapper.insert(track);
-                trackList.add(track);
+            Track track = new Track();
+            track.setAlbum(substringAlbum(album));
+            track.setArtist(substringArtist(artist));
+            track.setCoverImg(substringImgUrl(trackCoverImg));
+            track.setCreateTime(new Date());
+            track.setTrackId(Integer.valueOf(trackId));
+            track.setName(name);
+            track.setMp3Url(spliceMP3Url(journalId, sortId));
+            trackMapper.insert(track);
+            trackList.add(track);
 
-            }
         });
 
         Journal journal = new Journal();
