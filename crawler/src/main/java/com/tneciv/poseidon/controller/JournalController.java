@@ -1,15 +1,15 @@
 package com.tneciv.poseidon.controller;
 
-import com.tneciv.poseidon.common.ResEnv;
+import com.tneciv.poseidon.common.ResponseBody;
+import com.tneciv.poseidon.dto.JournalDto;
 import com.tneciv.poseidon.entity.Journal;
 import com.tneciv.poseidon.service.JournalService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,29 +24,25 @@ public class JournalController {
     @Autowired
     private JournalService journalService;
 
+    @ApiOperation(value = "获取期刊详细信息", notes = "根据url的id来获取期刊详细信息")
+    @ApiImplicitParam(name = "id", value = "期刊ID", required = true, dataType = "Integer")
     @GetMapping("/{id}")
-    public ResEnv<List<Journal>> queryById(@PathVariable("id") Integer id) {
-        List<Journal> journalList = null;
-        try {
-            journalList = journalService.queryByJournalId(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-            log.error(e.getMessage());
-            return ResEnv.fail(e, HttpStatus.BAD_REQUEST);
-        }
-        return ResEnv.success(journalList, HttpStatus.ACCEPTED);
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseBody<JournalDto> queryById(@PathVariable("id") Integer id) {
+        JournalDto journalDto = journalService.queryByJournalId(id);
+        return ResponseBody.success(journalDto);
     }
 
     @GetMapping("/keyword/{keyword}")
-    public ResEnv<List<Journal>> queryListByKeyword(@PathVariable("keyword") String keyword) {
+    public ResponseBody<List<Journal>> queryListByKeyword(@PathVariable("keyword") String keyword) {
         List<Journal> journalList = journalService.queryByKeyWord(keyword);
-        return ResEnv.success(journalList);
+        return ResponseBody.success(journalList);
     }
 
     @GetMapping("/title/{title}")
-    public ResEnv<List<Journal>> queryListByTitle(@PathVariable("title") String title) {
+    public ResponseBody<List<Journal>> queryListByTitle(@PathVariable("title") String title) {
         List<Journal> journalList = journalService.queryByLikeTitles(title);
-        return ResEnv.success(journalList, HttpStatus.ACCEPTED);
+        return ResponseBody.success(journalList);
     }
 
 }

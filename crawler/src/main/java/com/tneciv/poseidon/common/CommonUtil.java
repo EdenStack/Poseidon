@@ -2,6 +2,7 @@ package com.tneciv.poseidon.common;
 
 import org.apache.commons.lang.StringUtils;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -12,8 +13,26 @@ public class CommonUtil {
     public static final String JPG_SEPARATOR = ".jpg";
 
     public static String convertListToStringArr(List<String> list) {
-
         return String.join(",", list);
+    }
+
+    public static List<String> convertStringArrToList(String arr) {
+        String[] strings = StringUtils.split(arr, ",");
+        List<String> list = Arrays.asList(strings);
+        return list;
+    }
+
+    public static int[] convertStringToIntArr(String arr) {
+        //String[] strings = StringUtils.split(arr, ",");
+        //List<Integer> integerArrayList = new ArrayList<>();
+        //for (String s : strings) {
+        //    integerArrayList.add(Integer.valueOf(s));
+        //}
+        List<String> list = convertStringArrToList(arr);
+        int[] ints = list.stream()
+                .mapToInt(Integer::valueOf)
+                .toArray();
+        return ints;
     }
 
     public static String substringImgUrl(String url) {

@@ -21,4 +21,6 @@ public class Constant {
      */
     public static final int DEF_PAGE_NUM = 20;
 
+    public static final String MODEL_TYPE_SPRING = "spring";
+
 }
