@@ -22,7 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@JsonIgnoreProperties({"id", "keyWords", "createTime"})
+@JsonIgnoreProperties({"createTime"})
 public class JournalDto extends Journal implements Serializable {
 
     private static final long serialVersionUID = 4893090938458935373L;
