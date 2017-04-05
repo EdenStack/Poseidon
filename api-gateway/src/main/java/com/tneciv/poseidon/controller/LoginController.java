@@ -14,6 +14,10 @@ public class LoginController {
         return "hello world .";
     }
 
+    /**
+     * For test auth in header .
+     * @return
+     */
     @RequestMapping("/users")
     public String getUsers() {
         return "{\"users\":[{\"firstname\":\"Richard\", \"lastname\":\"Feynman\"}," +

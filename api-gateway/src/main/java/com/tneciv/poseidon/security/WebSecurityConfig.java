@@ -39,13 +39,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-        // http://stackoverflow.com/questions/18104809/using-spring-security-websecurityconfigureradapter-auth-jdbcauthentication-u
-        //auth.jdbcAuthentication()
-        //        .dataSource(dataSource)
-        //        .usersByUsernameQuery("select username as principal, password as credentials, true from users where username = ?")
-        //        .authoritiesByUsernameQuery("select username as principal, authority as role from authorities where username = ?")
-        //        .rolePrefix("ROLE_");
-
         //http://stackoverflow.com/questions/24174884/spring-security-jdbcauthentication-default-scheme-error-on-postgresql
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
