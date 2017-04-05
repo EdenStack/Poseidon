@@ -1,5 +1,6 @@
 package com.tneciv.poseidon.controller;
 
+import com.tneciv.poseidon.common.PageVo;
 import com.tneciv.poseidon.common.ResponseBody;
 import com.tneciv.poseidon.dto.JournalDto;
 import com.tneciv.poseidon.service.JournalService;
@@ -32,10 +33,14 @@ public class JournalController {
         return ResponseBody.success(journalDto);
     }
 
-    @GetMapping("/keyword/{keyword}")
-    public ResponseBody<List<JournalDto>> queryListByKeyword(@PathVariable("keyword") String keyword) {
-        List<JournalDto> journalList = journalService.queryByKeyWord(keyword);
-        return ResponseBody.success(journalList);
+    @GetMapping("/keyword")
+    public PageVo<JournalDto> queryListByKeyword(@RequestParam("q") String keyword,
+                                                 @RequestParam(value = "pageNum", required = false) Integer pageNum,
+                                                 @RequestParam(value = "pageSize", required = false) Integer pageSize) {
+        pageSize = pageSize == null ? 0 : pageSize;
+        pageNum = pageNum == null ? 1 : pageNum;
+        PageVo<JournalDto> voDto = journalService.queryByKeyword(keyword, pageNum, pageSize);
+        return voDto;
     }
 
     @GetMapping("/title/{title}")

@@ -1,5 +1,6 @@
 package com.tneciv.poseidon.service;
 
+import com.tneciv.poseidon.common.PageVo;
 import com.tneciv.poseidon.dto.JournalDto;
 
 import java.util.List;
@@ -12,5 +13,7 @@ public interface JournalService {
 
     List<JournalDto> queryByTitle(String title);
 
-    List<JournalDto> queryByKeyWord(String keyword);
+    List<JournalDto> queryByKeyWord(String keyword, int pageNum, int pageSize);
+
+    PageVo<JournalDto> queryByKeyword(String keyword, Integer pageNum, Integer pageSize);
 }
