@@ -5,7 +5,10 @@ import {Journal} from "../model/journal.model";
 
 @Injectable()
 export class JournalService {
+
   constructor(public http: Http) {
+    var body = new URLSearchParams();
+    body.append("body", "content");
   }
 
   getTest(): Observable<Journal> {
