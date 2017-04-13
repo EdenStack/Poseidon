@@ -1,16 +1,19 @@
 import {Headers, Http, RequestOptions} from '@angular/http';
 import {Injectable} from '@angular/core';
+import {Observable} from "rxjs/Observable";
+import {Journal} from "../model/journal.model";
 
 @Injectable()
 export class JournalService {
   constructor(public http: Http) {
   }
 
-  getTest() {
+  getTest(): Observable<Journal> {
     var headers = new Headers();
-    headers.append('Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNDkyMTgzNDg3f.Ic95X2-wRuM6Qd7G6KqUIndmucSOEa0AxynCRTTzXH_Ip1ZeZehWlfCcFi_1LKfRCuqf9mkkpNvpMu3jO_NusA');
+    headers.append('Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNDkyOTUyMzE4fQ.r0n60AsW52WEVGkdc7LopENc5s7kuRJseITlw8nJLo4MmiE1RBhjzIIzuZhgZaaCcbjDpyyveafjTYEud2bWqA');
     var options = new RequestOptions({headers: headers});
-    return this.http.get('http://localhost:8088/music/journal/333', {headers: headers});
+    return this.http.get('http://localhost:8088/luoo/journal/333', options)
+      .map(res => res.json().content);
   }
 
 }

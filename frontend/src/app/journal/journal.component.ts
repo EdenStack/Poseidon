@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {JournalService} from "./journal.service";
+import {Component, OnInit} from "@angular/core";
+import "rxjs/Rx";
+import {Journal} from "../model/journal.model";
+import {HttpService} from "../common/http.service";
 
 @Component({
   selector: 'app-journal',
@@ -7,9 +9,9 @@ import {JournalService} from "./journal.service";
   styleUrls: ['./journal.component.css']
 })
 export class JournalComponent implements OnInit {
-  somrthing: string;
+  private journal: Journal = new Journal();
 
-  constructor(public journalService: JournalService) {
+  constructor(public httpService: HttpService) {
   }
 
   ngOnInit() {
@@ -17,10 +19,16 @@ export class JournalComponent implements OnInit {
   }
 
   testGet() {
-    this.journalService.getTest().subscribe(
-      response => this.somrthing = JSON.stringify(response),
-      error2 => console.log(error2)
-    );
+    this.httpService.get("/luoo/journal/666")
+      .subscribe(
+        response => {
+          this.journal = response;
+          console.log(this.journal);
+        },
+        error2 => {
+          console.log(error2)
+        }
+      );
   }
 
 }
