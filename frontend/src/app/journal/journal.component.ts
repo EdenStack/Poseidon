@@ -25,8 +25,8 @@ export class JournalComponent implements OnInit {
           this.journal = response;
           console.log(this.journal);
         },
-        error2 => {
-          console.log(error2)
+        error => {
+          console.log(error)
         }
       );
   }
