@@ -8,9 +8,9 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 @EnableEurekaClient
 @MapperScan(basePackages = "com.tneciv.poseidon.dao")
 @SpringBootApplication
-public class CrawlerApplication {
+public class LuooApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CrawlerApplication.class, args);
+        SpringApplication.run(LuooApplication.class, args);
     }
 }

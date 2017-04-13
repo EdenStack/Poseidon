@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.tneciv.poseidon</groupId>
-    <artifactId>crawler</artifactId>
+    <artifactId>luoo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>crawler</name>
+    <name>luoo</name>
     <description>Crawler service for Poseidon</description>
 
     <parent>
@@ -137,7 +137,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Dalston.RC1</version>
+                <version>Dalston.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
