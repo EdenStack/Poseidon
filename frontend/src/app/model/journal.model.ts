@@ -2,7 +2,7 @@ import {TrackModel} from "./track.model";
 /**
  * Created by Tneciv on 2017/4/13.
  */
-export class Journal {
+export class JournalModel {
   title: string;
   keyWords: string;
   id: number;

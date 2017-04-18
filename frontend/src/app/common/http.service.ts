@@ -13,8 +13,10 @@ export class HttpService {
   private options: RequestOptions;
 
   constructor(private http: Http) {
-    var headers = new Headers();
-    headers.append('Authorization', 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNDkyOTUyMzE4fQ.r0n60AsW52WEVGkdc7LopENc5s7kuRJseITlw8nJLo4MmiE1RBhjzIIzuZhgZaaCcbjDpyyveafjTYEud2bWqA');
+    let headers = new Headers();
+    localStorage.setItem("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNDkyOTUyMzE4fQ.r0n60AsW52WEVGkdc7LopENc5s7kuRJseITlw8nJLo4MmiE1RBhjzIIzuZhgZaaCcbjDpyyveafjTYEud2bWqA");
+    let item = localStorage.getItem("Authorization");
+    headers.append('Authorization', item);
     this.options = new RequestOptions({headers: headers});
   }
 

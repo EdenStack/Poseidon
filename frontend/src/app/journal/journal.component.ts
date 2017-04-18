@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import "rxjs/Rx";
-import {Journal} from "../model/journal.model";
+import {JournalModel} from "../model/journal.model";
 import {HttpService} from "../common/http.service";
 
 @Component({
@@ -8,8 +8,10 @@ import {HttpService} from "../common/http.service";
   templateUrl: './journal.component.html',
   styleUrls: ['./journal.component.css']
 })
+
 export class JournalComponent implements OnInit {
-  private journal: Journal = new Journal();
+
+  private journal: JournalModel = new JournalModel();
 
   constructor(public httpService: HttpService) {
   }
