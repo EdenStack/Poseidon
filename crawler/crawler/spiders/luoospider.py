@@ -39,7 +39,7 @@ class LuooCrawler(scrapy.Spider):
 
         # 此时为最后一页，收工
         if 'javascript' in nextPageUrl:
-            print('All pages crawled')
+            self.log('All pages crawled')
             return
         # 不是最后一页，则继续爬取
         else:
