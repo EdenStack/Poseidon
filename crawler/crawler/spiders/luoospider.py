@@ -15,8 +15,11 @@ class LuooCrawler(scrapy.Spider):
             item = page.select('.cover-wrapper')
             if item:
                 url = item[0].get('href')
-                yield scrapy.Request(url, self.parse_detail)
+                yield scrapy.Request(url, self.parse_page)
 
-    def parse_detail(self, response):
+    def parse_page(self, response):
         res = BeautifulSoup(response.body, self.htmlParser)
-        self.log(res.prettify())
+        cover = res.select('.vol-cover-wrapper')
+        if cover:
+            coverImg = cover[0].img.get('src')
+            self.log(coverImg)
