@@ -7,6 +7,7 @@ import {AppComponent} from './app.component';
 import {JournalComponent} from './journal/journal.component';
 import {JournalService} from "./journal/journal.service";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {HttpService} from "./common/http.service";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     HttpModule,
     NgbModule.forRoot()
   ],
-  providers: [JournalService],
+  providers: [JournalService, HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
