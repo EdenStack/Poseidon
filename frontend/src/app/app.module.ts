@@ -8,6 +8,7 @@ import {JournalComponent} from './journal/journal.component';
 import {JournalService} from "./journal/journal.service";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {HttpService} from "./common/http.service";
+import {MdButtonModule, MdCardModule, MdCheckboxModule, MdRadioModule} from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,11 @@ import {HttpService} from "./common/http.service";
     BrowserModule,
     FormsModule,
     HttpModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    MdButtonModule,
+    MdCheckboxModule,
+    MdRadioModule,
+    MdCardModule
   ],
   providers: [JournalService, HttpService],
   bootstrap: [AppComponent]
