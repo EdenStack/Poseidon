@@ -48,5 +48,11 @@ public class JournalController {
         List<JournalDto> journalList = journalService.queryByTitle(title);
         return ResponseBody.success(journalList);
     }
+    
+    @GetMapping("/recent")
+    public ResponseBody<List<JournalDto>> queryRecent(){
+        List<JournalDto> journalList = journalService.queryRecent();
+        return ResponseBody.success(journalList);
+    }
 
 }
