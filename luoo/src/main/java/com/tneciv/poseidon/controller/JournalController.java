@@ -27,14 +27,13 @@ public class JournalController {
     @ApiOperation(value = "获取期刊详细信息", notes = "根据url的id来获取期刊详细信息")
     @ApiImplicitParam(name = "id", value = "期刊ID", required = true, dataType = "Integer")
     @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
     public ResponseBody<JournalDto> queryById(@PathVariable("id") Integer id) {
         JournalDto journalDto = journalService.queryByJournalId(id);
         return ResponseBody.success(journalDto);
     }
 
     @GetMapping("/keyword")
-    public PageVo<JournalDto> queryListByKeyword(@RequestParam("q") String keyword,
+    public PageVo<JournalDto> queryListByKeyword(@RequestParam("keyword") String keyword,
                                                  @RequestParam(value = "pageNum", required = false) Integer pageNum,
                                                  @RequestParam(value = "pageSize", required = false) Integer pageSize) {
         pageSize = pageSize == null ? 0 : pageSize;
@@ -48,9 +47,10 @@ public class JournalController {
         List<JournalDto> journalList = journalService.queryByTitle(title);
         return ResponseBody.success(journalList);
     }
-    
+
     @GetMapping("/recent")
-    public ResponseBody<List<JournalDto>> queryRecent(){
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseBody<List<JournalDto>> queryRecent() {
         List<JournalDto> journalList = journalService.queryRecent();
         return ResponseBody.success(journalList);
     }
