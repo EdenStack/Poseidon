@@ -72,6 +72,14 @@ public class JournalServiceImpl implements JournalService {
         return voDto;
     }
 
+    @Override
+    public List<JournalDto> queryRecent() {
+        PageHelper.startPage(0, 10);
+        List<Journal> journals = this.journalMapper.queryRecent();
+        List<JournalDto> dtos = this.parseJournalDto(journals);
+        return dtos;
+    }
+
     private List<JournalDto> parseJournalDto(List<Journal> journalList) {
         List<JournalDto> dtos = Observable.fromIterable(journalList)
                 .map(this::parseJournalDto)

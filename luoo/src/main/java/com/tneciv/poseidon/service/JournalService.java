@@ -16,4 +16,6 @@ public interface JournalService {
     List<JournalDto> queryByKeyWord(String keyword, int pageNum, int pageSize);
 
     PageVo<JournalDto> queryByKeyword(String keyword, Integer pageNum, Integer pageSize);
+
+    List<JournalDto> queryRecent();
 }
