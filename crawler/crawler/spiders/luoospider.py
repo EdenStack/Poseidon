@@ -3,6 +3,9 @@
 import scrapy
 from bs4 import BeautifulSoup
 
+from crawler.luooItems import LuooItem
+from crawler.trackItems import TrackItem
+
 
 class LuooCrawler(scrapy.Spider):
     name = 'luoo'
@@ -28,7 +31,7 @@ class LuooCrawler(scrapy.Spider):
             if item:
                 url = item[0].get(self.href)
                 journalUrlList.append(url)
-                
+
         # 开始处理当前页面所有期刊
         for journalUrl in journalUrlList:
             yield scrapy.Request(journalUrl, self.parse_page)
@@ -48,7 +51,19 @@ class LuooCrawler(scrapy.Spider):
     # 处理页面详情，解析、存储
     def parse_page(self, response):
         soup = BeautifulSoup(response.body, self.htmlParser)
+        luooItem = LuooItem()
+        trackItem = TrackItem()
         cover = soup.select('.vol-cover-wrapper')
+
         if cover:
-            coverImg = cover[0].img.get('src')
-            # self.log(coverImg)
+            prefix = '.jpg'
+            coverImg = cover[0].img.get('src').split(prefix)[0] + prefix
+            luooItem['volImg'] = coverImg
+
+        luooItem['volDesc'] = soup.select('.vol-desc')[0].text
+        luooItem['volKeywords'] = soup.find_all('meta', {'name': 'keywords'})[0]['content']
+        luooItem['volTitle'] = soup.select('.vol-title')[0].text
+        luooItem['volNumber'] = soup.select('.vol-number')[0].text
+        luooItem['volDate'] = soup.select('.vol-date')[0].text
+
+        self.log(luooItem)
