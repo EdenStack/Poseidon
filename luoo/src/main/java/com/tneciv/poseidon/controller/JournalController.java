@@ -38,6 +38,7 @@ public class JournalController {
                                                  @RequestParam(value = "pageSize", required = false) Integer pageSize) {
         pageSize = pageSize == null ? 0 : pageSize;
         pageNum = pageNum == null ? 1 : pageNum;
+        //todo add aop
         PageVo<JournalDto> voDto = journalService.queryByKeyword(keyword, pageNum, pageSize);
         return voDto;
     }
