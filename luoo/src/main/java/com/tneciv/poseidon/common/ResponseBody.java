@@ -46,7 +46,7 @@ public class ResponseBody<T> {
                 || e instanceof IllegalArgumentException) {
             return new ResponseBody<>(false, e.getMessage(), null);
         } else {
-            return fail(msg);
+            return fail(CommonUtil.parseException2Str(e));
         }
     }
 
