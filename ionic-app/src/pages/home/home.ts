@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {NavController} from 'ionic-angular';
-import {HttpService} from '../../common/http.service';
+import { Component, OnInit } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import { HttpService } from '../../common/http.service';
+import { DetailPage } from '../detail/detail'
 
 @Component({
   selector: 'page-home',
@@ -8,7 +9,7 @@ import {HttpService} from '../../common/http.service';
 })
 export class HomePage implements OnInit {
 
-  public recentJournal: any;
+  public recentJournalList: any;
 
   constructor(public navCtrl: NavController, public httpService: HttpService) {
 
@@ -17,17 +18,17 @@ export class HomePage implements OnInit {
   ngOnInit(): void {
     this.httpService.get("recent")
       .subscribe(
-        response => {
-          this.recentJournal = response;
-        },
-        error => {
-          console.log(error)
-        }
+      response => {
+        this.recentJournalList = response;
+      },
+      error => {
+        console.log("Error happens :" + error);
+      }
       );
   }
 
   itemSelected(item) {
-    console.log(item);
+    this.navCtrl.push(DetailPage, { "item": item });
   }
 
 }
