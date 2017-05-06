@@ -1,6 +1,7 @@
 package com.tneciv.poseidon.aspect;
 
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -19,8 +20,11 @@ public class PageAspect {
     }
 
     @Before("controllerPoint()")
-    public void ctrlBefore() {
-        log.debug("Controller has called");
+    public void ctrlBefore(JoinPoint point) {
+        Object[] args = point.getArgs();
+        String className = point.getSignature().getDeclaringTypeName();
+        String methodName = point.getSignature().getName();
+        log.debug("{} in {} has been called, para is {}", methodName, className, args.toString());
     }
 
 }
