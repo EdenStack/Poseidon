@@ -2,6 +2,7 @@ package com.tneciv.poseidon.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.tneciv.poseidon.common.ApplicationException;
 import com.tneciv.poseidon.common.CommonUtil;
 import com.tneciv.poseidon.common.PageVo;
 import com.tneciv.poseidon.dao.JournalExtMapper;
@@ -89,6 +90,9 @@ public class JournalServiceImpl implements JournalService {
     }
 
     private JournalDto parseJournalDto(Journal journal) {
+        if (journal == null) {
+            throw new ApplicationException("期刊内容为空");
+        }
         JournalDto dto = journalJournalDtoMapper.toTarget(journal);
         String tracksArr = dto.getTracksArr();
         int[] list = CommonUtil.convertStringToIntArr(tracksArr);
