@@ -18,7 +18,7 @@ public class ResponseBody<T> {
     private final Map<String, Object> options = new HashMap<>();
 
     public static <T> ResponseBody<T> success(String msg, T object) {
-        return new ResponseBody<>(true, msg, object);
+        return new ResponseBody<T>(true, msg, object);
     }
 
     public static <T> ResponseBody<T> success(T object) {

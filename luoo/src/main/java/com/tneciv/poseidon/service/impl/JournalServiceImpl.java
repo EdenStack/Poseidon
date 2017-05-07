@@ -7,7 +7,6 @@ import com.tneciv.poseidon.common.CommonUtil;
 import com.tneciv.poseidon.common.PageVo;
 import com.tneciv.poseidon.dao.JournalExtMapper;
 import com.tneciv.poseidon.dto.JournalDto;
-import com.tneciv.poseidon.dto.TrackDto;
 import com.tneciv.poseidon.entity.Journal;
 import com.tneciv.poseidon.entity.JournalExample;
 import com.tneciv.poseidon.entity.Track;
@@ -29,8 +28,6 @@ public class JournalServiceImpl implements JournalService {
 
     @Autowired
     private JournalExtMapper journalMapper;
-    @Autowired
-    private JournalDto.JournalDtoMapper journalJournalDtoMapper;
     @Autowired
     private TrackService trackService;
 
@@ -93,12 +90,19 @@ public class JournalServiceImpl implements JournalService {
         if (journal == null) {
             throw new ApplicationException("期刊内容为空");
         }
-        JournalDto dto = journalJournalDtoMapper.toTarget(journal);
-        String tracksArr = dto.getTracksArr();
-        int[] list = CommonUtil.convertStringToIntArr(tracksArr);
+        JournalDto dto = new JournalDto();
+        String journalTracks = journal.getTracks();
+        int[] list = CommonUtil.convertStringToIntArr(journalTracks);
         List<Track> trackList = this.trackService.queryListByTrackIds(list);
-        List<TrackDto> tracks = this.trackService.parseTrackList(trackList);
-        dto.setTracksList(tracks);
+        dto.setTracksList(trackList);
+        dto.setId(journal.getId());
+        dto.setTitle(journal.getTitle());
+        dto.setKeyWords(journal.getKeyWords());
+        dto.setJournalId(journal.getJournalId());
+        dto.setVolCoverImg(journal.getVolCoverImg());
+        dto.setRelativeVols(journal.getRelativeVols());
+        dto.setVolDate(journal.getVolDate());
+        dto.setVolDesc(journal.getVolDesc());
         return dto;
     }
 

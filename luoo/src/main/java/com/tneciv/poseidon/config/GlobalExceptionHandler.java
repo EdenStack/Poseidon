@@ -1,5 +1,7 @@
-package com.tneciv.poseidon.common;
+package com.tneciv.poseidon.config;
 
+import com.tneciv.poseidon.common.ApplicationException;
+import com.tneciv.poseidon.common.ResponseBody;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
