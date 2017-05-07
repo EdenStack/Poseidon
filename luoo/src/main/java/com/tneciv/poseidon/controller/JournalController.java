@@ -34,11 +34,8 @@ public class JournalController {
 
     @GetMapping("/keyword")
     public PageVo<JournalDto> queryListByKeyword(@RequestParam("keyword") String keyword,
-                                                 @RequestParam(value = "pageNum", required = false) Integer pageNum,
-                                                 @RequestParam(value = "pageSize", required = false) Integer pageSize) {
-        pageSize = pageSize == null ? 0 : pageSize;
-        pageNum = pageNum == null ? 1 : pageNum;
-        //todo add aop
+                                                 @RequestParam("pageNum") Integer pageNum,
+                                                 @RequestParam("pageSize") Integer pageSize) {
         PageVo<JournalDto> voDto = journalService.queryByKeyword(keyword, pageNum, pageSize);
         return voDto;
     }

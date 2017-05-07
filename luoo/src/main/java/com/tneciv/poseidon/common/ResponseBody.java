@@ -4,14 +4,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 @Data
 @Slf4j
 @NoArgsConstructor
-public class ResponseBody<T> {
+public class ResponseBody<T> implements Serializable {
 
+    private static final long serialVersionUID = -4532048060066823936L;
+    
     private boolean succ = true;
     private String msg;
     private T content;

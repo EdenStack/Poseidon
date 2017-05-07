@@ -13,6 +13,7 @@ import java.util.List;
 public class CommonUtil {
 
     private CommonUtil() {
+        throw new ExceptionInInitializerError("该类不允许被实例化");
     }
 
     private static final String JPG_SEPARATOR = ".jpg";

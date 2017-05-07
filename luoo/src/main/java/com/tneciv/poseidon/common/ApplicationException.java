@@ -2,6 +2,8 @@ package com.tneciv.poseidon.common;
 
 public class ApplicationException extends RuntimeException {
 
+    private static final long serialVersionUID = -8823232859182991704L;
+
     public ApplicationException() {
         super();
     }
