@@ -11,7 +11,7 @@ import java.util.Map;
 @Data
 @Slf4j
 @NoArgsConstructor
-public class ResponseBody<T> implements Serializable {
+public class ResponseWrapper<T> implements Serializable {
 
     private static final long serialVersionUID = -4532048060066823936L;
     
@@ -20,59 +20,59 @@ public class ResponseBody<T> implements Serializable {
     private T content;
     private final Map<String, Object> options = new HashMap<>();
 
-    public static <T> ResponseBody<T> success(String msg, T object) {
-        return new ResponseBody<T>(true, msg, object);
+    public static <T> ResponseWrapper<T> success(String msg, T object) {
+        return new ResponseWrapper<T>(true, msg, object);
     }
 
-    public static <T> ResponseBody<T> success(T object) {
-        return new ResponseBody<>(true, Constant.DEF_SUCC_MSG, object);
+    public static <T> ResponseWrapper<T> success(T object) {
+        return new ResponseWrapper<>(true, Constant.DEF_SUCC_MSG, object);
     }
 
-    public static <T> ResponseBody<T> success(String msg) {
-        return new ResponseBody<>(true, msg, null);
+    public static <T> ResponseWrapper<T> success(String msg) {
+        return new ResponseWrapper<>(true, msg, null);
     }
 
-    public static <T> ResponseBody<T> success() {
+    public static <T> ResponseWrapper<T> success() {
         return success(Constant.DEF_SUCC_MSG);
     }
 
-    public static <T> ResponseBody<T> fail(String msg) {
-        return new ResponseBody<>(false, msg, null);
+    public static <T> ResponseWrapper<T> fail(String msg) {
+        return new ResponseWrapper<>(false, msg, null);
     }
 
-    public static <T> ResponseBody<T> fail() {
+    public static <T> ResponseWrapper<T> fail() {
         return fail(Constant.DEF_FAIL_MSG);
     }
 
-    public static <T> ResponseBody<T> fail(String msg, Exception e) {
+    public static <T> ResponseWrapper<T> fail(String msg, Exception e) {
         if (e instanceof ApplicationException
                 || e instanceof IllegalArgumentException) {
-            return new ResponseBody<>(false, e.getMessage(), null);
+            return new ResponseWrapper<>(false, e.getMessage(), null);
         } else {
             return fail(CommonUtil.parseException2Str(e));
         }
     }
 
-    public static <T> ResponseBody<T> fail(Exception e) {
+    public static <T> ResponseWrapper<T> fail(Exception e) {
         return fail(Constant.DEF_FAIL_MSG, e);
     }
 
-    public ResponseBody(boolean succ) {
+    public ResponseWrapper(boolean succ) {
         this();
         this.succ = succ;
     }
 
-    public ResponseBody(boolean succ, String msg) {
+    public ResponseWrapper(boolean succ, String msg) {
         this(succ);
         this.msg = msg;
     }
 
-    public ResponseBody(boolean succ, String msg, T content) {
+    public ResponseWrapper(boolean succ, String msg, T content) {
         this(succ, msg);
         this.content = content;
     }
 
-    public ResponseBody addOption(String key, Object value) {
+    public ResponseWrapper addOption(String key, Object value) {
         options.put(key, value);
         return this;
     }

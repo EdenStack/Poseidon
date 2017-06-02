@@ -1,5 +1,6 @@
 package com.tneciv.poseidon.common;
 
+import lombok.experimental.UtilityClass;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.PrintWriter;
@@ -10,12 +11,9 @@ import java.util.List;
 /**
  * Created by Tneciv on 2017/3/25.
  */
+@UtilityClass
 public class CommonUtil {
-
-    private CommonUtil() {
-        throw new ExceptionInInitializerError("该类不允许被实例化");
-    }
-
+    
     private static final String JPG_SEPARATOR = ".jpg";
 
     public static String convertListToStringArr(List<String> list) {
