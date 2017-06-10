@@ -9,11 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
 
-    @RequestMapping("/")
-    public String auth() {
-        return "hello world .";
-    }
-
     /**
      * For test auth in header .
      * @return
