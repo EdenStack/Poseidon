@@ -1,5 +1,7 @@
 package com.tneciv.poseidon.controller;
 
+import com.tneciv.poseidon.common.LoginUser;
+import com.tneciv.poseidon.security.AccountCredentials;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,10 +13,12 @@ public class LoginController {
 
     /**
      * For test auth in header .
+     *
      * @return
      */
     @RequestMapping("/users")
-    public String getUsers() {
+    public String getUsers(@LoginUser AccountCredentials account) {
+        String username = account.getUsername();
         return "{\"users\":[{\"firstname\":\"Richard\", \"lastname\":\"Feynman\"}," +
                 "{\"firstname\":\"Marie\",\"lastname\":\"Curie\"}]}";
     }
