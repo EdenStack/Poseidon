@@ -21,7 +21,7 @@ export class JournalComponent implements OnInit {
     headers.append('Authorization', item);
     this.options = new RequestOptions({headers: headers});
 
-    this.http.get('luoo/journal/keyword?keyword=民谣&pageSize=5&pageNum=1', this.options)
+    this.http.get('http://localhost:8088/api/luoo/journal/keyword?keyword=民谣&pageSize=5&pageNum=1', this.options)
       .map(res => res.json())
       .subscribe(
         res => alert(res),

@@ -1,6 +1,7 @@
 package com.tneciv.poseidon.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -17,6 +18,8 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Value("${zuul.prefix}")
+    private String apiPath;
     @Autowired
     private DataSource dataSource;
 
@@ -26,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .requestMatchers(CorsUtils::isCorsRequest).permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
-                .antMatchers("/luoo/**").authenticated()
+                .antMatchers(apiPath + "/**").authenticated()
                 .and()
                 // We filter the api/login requests
                 .addFilterBefore(new JWTLoginFilter("/login", authenticationManager()),
