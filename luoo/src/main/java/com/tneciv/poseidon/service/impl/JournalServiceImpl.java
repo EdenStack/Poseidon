@@ -12,12 +12,13 @@ import com.tneciv.poseidon.entity.JournalExample;
 import com.tneciv.poseidon.entity.Track;
 import com.tneciv.poseidon.service.JournalService;
 import com.tneciv.poseidon.service.TrackService;
-import io.reactivex.Observable;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Tneciv on 2017/3/27.
@@ -79,11 +80,9 @@ public class JournalServiceImpl implements JournalService {
     }
 
     private List<JournalDto> parseJournalDto(List<Journal> journalList) {
-        List<JournalDto> dtos = Observable.fromIterable(journalList)
+        return journalList.stream()
                 .map(this::parseJournalDto)
-                .toList()
-                .blockingGet();
-        return dtos;
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     private JournalDto parseJournalDto(Journal journal) {

@@ -1,6 +1,9 @@
 package com.tneciv.poseidon.controller;
 
+import com.tneciv.poseidon.annotations.TnecivArgument;
 import com.tneciv.poseidon.common.ResponseWrapper;
+import com.tneciv.poseidon.dto.JournalDto;
+import com.tneciv.poseidon.entity.Track;
 import com.tneciv.poseidon.service.TrackService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
 import java.util.concurrent.Future;
 
 /**
@@ -28,7 +32,8 @@ public class IndexController {
 
     @GetMapping("/testAsync")
     @ResponseBody
-    public ResponseWrapper get() throws Exception {
+    public ResponseWrapper get(@TnecivArgument JournalDto journal) throws Exception {
+        List<Track> list = journal.getTracksList();
         long startMill = System.currentTimeMillis();
         long id = Thread.currentThread().getId();
         Future<String> future1 = trackService.getSth(1000, "future1");
