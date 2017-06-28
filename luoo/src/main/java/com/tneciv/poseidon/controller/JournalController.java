@@ -1,7 +1,7 @@
 package com.tneciv.poseidon.controller;
 
 import com.tneciv.poseidon.common.PageVo;
-import com.tneciv.poseidon.common.ResponseBody;
+import com.tneciv.poseidon.common.ResponseWrapper;
 import com.tneciv.poseidon.dto.JournalDto;
 import com.tneciv.poseidon.service.JournalService;
 import io.swagger.annotations.ApiImplicitParam;
@@ -27,33 +27,30 @@ public class JournalController {
     @ApiOperation(value = "获取期刊详细信息", notes = "根据url的id来获取期刊详细信息")
     @ApiImplicitParam(name = "id", value = "期刊ID", required = true, dataType = "Integer")
     @GetMapping("/{id}")
-    public ResponseBody<JournalDto> queryById(@PathVariable("id") Integer id) {
+    public ResponseWrapper<JournalDto> queryById(@PathVariable("id") Integer id) {
         JournalDto journalDto = journalService.queryByJournalId(id);
-        return ResponseBody.success(journalDto);
+        return ResponseWrapper.success(journalDto);
     }
 
     @GetMapping("/keyword")
     public PageVo<JournalDto> queryListByKeyword(@RequestParam("keyword") String keyword,
-                                                 @RequestParam(value = "pageNum", required = false) Integer pageNum,
-                                                 @RequestParam(value = "pageSize", required = false) Integer pageSize) {
-        pageSize = pageSize == null ? 0 : pageSize;
-        pageNum = pageNum == null ? 1 : pageNum;
-        //todo add aop
+                                                 @RequestParam("pageNum") Integer pageNum,
+                                                 @RequestParam("pageSize") Integer pageSize) {
         PageVo<JournalDto> voDto = journalService.queryByKeyword(keyword, pageNum, pageSize);
         return voDto;
     }
 
     @GetMapping("/title/{title}")
-    public ResponseBody<List<JournalDto>> queryListByTitle(@PathVariable("title") String title) {
+    public ResponseWrapper<List<JournalDto>> queryListByTitle(@PathVariable("title") String title) {
         List<JournalDto> journalList = journalService.queryByTitle(title);
-        return ResponseBody.success(journalList);
+        return ResponseWrapper.success(journalList);
     }
 
     @GetMapping("/recent")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseBody<List<JournalDto>> queryRecent() {
+    public ResponseWrapper<List<JournalDto>> queryRecent() {
         List<JournalDto> journalList = journalService.queryRecent();
-        return ResponseBody.success(journalList);
+        return ResponseWrapper.success(journalList);
     }
 
 }

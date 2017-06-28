@@ -1,0 +1,41 @@
+spring:
+  output:
+    ansi:
+      enabled: detect
+  application:
+    name: api-gateway
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://tneciv.xyz:3306/auth?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false
+    username: tneciv
+    password: tneciv
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+server:
+  port: 8088
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1111/eureka/
+logging:
+  root:
+    level: DEBUG
+zuul:
+  routes:
+    journal:
+      path: /luoo/**
+      serviceId: journal-service
+  host:
+    connect-timeout-millis: 10000
+    socket-timeout-millis: 60000
+  prefix: /api
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000

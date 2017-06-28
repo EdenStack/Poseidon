@@ -3,15 +3,15 @@
 
  Source Server         : LocalMySQL
  Source Server Type    : MySQL
- Source Server Version : 50717
+ Source Server Version : 50718
  Source Host           : localhost
  Source Database       : auth
 
  Target Server Type    : MySQL
- Target Server Version : 50717
+ Target Server Version : 50718
  File Encoding         : utf-8
 
- Date: 03/31/2017 22:35:56 PM
+ Date: 06/10/2017 23:09:07 PM
 */
 
 SET NAMES utf8mb4;
@@ -28,6 +28,13 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+--  Records of `roles`
+-- ----------------------------
+BEGIN;
+INSERT INTO `roles` VALUES ('1', 'user'), ('2', 'admin');
+COMMIT;
+
+-- ----------------------------
 --  Table structure for `users`
 -- ----------------------------
 DROP TABLE IF EXISTS `users`;
@@ -39,6 +46,13 @@ CREATE TABLE `users` (
   `role_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Records of `users`
+-- ----------------------------
+BEGIN;
+INSERT INTO `users` VALUES ('2', 'Tneciv', 'helloworld', '1', '1'), ('3', 'user', '123', '1', '2');
+COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

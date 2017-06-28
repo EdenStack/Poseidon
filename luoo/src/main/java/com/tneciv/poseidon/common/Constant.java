@@ -1,5 +1,8 @@
 package com.tneciv.poseidon.common;
 
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
 public class Constant {
     /**
      * 默认成功消息

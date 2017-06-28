@@ -7,18 +7,18 @@ import com.tneciv.poseidon.common.CommonUtil;
 import com.tneciv.poseidon.common.PageVo;
 import com.tneciv.poseidon.dao.JournalExtMapper;
 import com.tneciv.poseidon.dto.JournalDto;
-import com.tneciv.poseidon.dto.TrackDto;
 import com.tneciv.poseidon.entity.Journal;
 import com.tneciv.poseidon.entity.JournalExample;
 import com.tneciv.poseidon.entity.Track;
 import com.tneciv.poseidon.service.JournalService;
 import com.tneciv.poseidon.service.TrackService;
-import io.reactivex.Observable;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Tneciv on 2017/3/27.
@@ -29,8 +29,6 @@ public class JournalServiceImpl implements JournalService {
 
     @Autowired
     private JournalExtMapper journalMapper;
-    @Autowired
-    private JournalDto.JournalDtoMapper journalJournalDtoMapper;
     @Autowired
     private TrackService trackService;
 
@@ -82,23 +80,28 @@ public class JournalServiceImpl implements JournalService {
     }
 
     private List<JournalDto> parseJournalDto(List<Journal> journalList) {
-        List<JournalDto> dtos = Observable.fromIterable(journalList)
+        return journalList.stream()
                 .map(this::parseJournalDto)
-                .toList()
-                .blockingGet();
-        return dtos;
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     private JournalDto parseJournalDto(Journal journal) {
         if (journal == null) {
             throw new ApplicationException("期刊内容为空");
         }
-        JournalDto dto = journalJournalDtoMapper.toTarget(journal);
-        String tracksArr = dto.getTracksArr();
-        int[] list = CommonUtil.convertStringToIntArr(tracksArr);
+        JournalDto dto = new JournalDto();
+        String journalTracks = journal.getTracks();
+        int[] list = CommonUtil.convertStringToIntArr(journalTracks);
         List<Track> trackList = this.trackService.queryListByTrackIds(list);
-        List<TrackDto> tracks = this.trackService.parseTrackList(trackList);
-        dto.setTracksList(tracks);
+        dto.setTracksList(trackList);
+        dto.setId(journal.getId());
+        dto.setTitle(journal.getTitle());
+        dto.setKeyWords(journal.getKeyWords());
+        dto.setJournalId(journal.getJournalId());
+        dto.setVolCoverImg(journal.getVolCoverImg());
+        dto.setRelativeVols(journal.getRelativeVols());
+        dto.setVolDate(journal.getVolDate());
+        dto.setVolDesc(journal.getVolDesc());
         return dto;
     }
 
