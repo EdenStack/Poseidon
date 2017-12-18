@@ -1,0 +1,7 @@
+{
+  "/": {
+    "//": "http://localhost:8080",
+    "target": "http://123.456.789.100:8765",
+    "secure": false
+  }
+}

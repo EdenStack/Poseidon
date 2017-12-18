@@ -17,12 +17,13 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@JsonIgnoreProperties({"createTime"})
+@JsonIgnoreProperties({"createTime" })
 public class JournalDto extends Journal implements Serializable {
 
     private static final long serialVersionUID = 4893090938458935373L;
-    
+    public static final String DTO_NAME = "JournalDto";
+
     @JsonProperty("tracks")
     private List<Track> tracksList;
-    
+
 }
